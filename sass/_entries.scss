@@ -1,0 +1,109 @@
+@import 'variables';
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+.search {
+    display: grid;
+    grid-template-columns: 80% 1fr;
+    margin:20px;
+
+    input[type="text"] {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    input[type="submit"] {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+.container {
+    display:grid;
+    grid-template-columns: 70px 1fr;
+    grid-template-rows: 50px auto 150px 40px;
+    border: 1px solid grey;
+    margin: 20px auto 0 auto;
+    max-width: 300px;
+    padding: 10px;
+    border-radius:10px;
+    background-color: $azul-clarito;
+
+    .topSideInfo {
+        display:grid;
+        grid-template-columns: 1fr 80px;
+
+        .dateAndHashtag {
+            display:grid;
+            grid-template-rows: repeat(2, 1fr);
+            font-size:12px;
+        }
+
+        .name {
+            font-size:20px;
+            max-width: 130px;
+            overflow: hidden;
+        }
+    }
+
+    .botSideInfo {
+        grid-column: 1 / 3;
+        display:grid;
+        grid-template-columns: 1fr 80px;
+        align-items: center;
+        margin-top:10px;
+    }
+
+    .avatar {
+        max-width: 65px;
+        max-height: 45px;
+        border-radius: 22.5px; 
+      }
+
+    .content {
+        grid-column: 1 / 3;
+        background-color: white;
+        border-radius: 10px;
+        margin-bottom:5px;
+        padding:5px;
+    }
+
+    .entryImage {
+        grid-column: 1 / 3;
+        grid-row: 3 / 4;
+        width: 100%;
+        height: 100%;
+        max-height:150px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+}
+
+.pages {
+    text-align: center;
+    margin:0 auto;
+
+    .pageButton {
+        display:inline-block;
+        align-items: center;
+        width:32px;
+        height:32px;
+        border-radius: 16px;
+        background-color: $azul-clarito;
+        text-decoration: none;
+        color:white;
+        margin:20px;
+        cursor: pointer;
+        font-size:22px;
+    }
+}

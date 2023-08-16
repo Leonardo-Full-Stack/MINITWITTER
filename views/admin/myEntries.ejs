@@ -1,0 +1,48 @@
+<%- include('partials/header.ejs') %>
+<main>
+<h1>
+    <%= title %>
+</h1>
+<p>
+    <%= msg %>
+</p>
+
+
+<% data.forEach((element, index) => { %>
+    <div class="container">
+        <div class="gridTitle">
+            <%= element.title %>
+        </div>
+        
+        
+        <div class="gridImage">
+            <div class="gridContent">
+                <%= element.extract %>
+            </div>
+            <img class="entryImage" src="<%= element.entryimage %>" alt="Imagen de la entrada">
+        </div>
+
+        <div class="gridEdit">
+            <a href="edit/<%= element.id_entry %>">
+                <button>
+                    editar
+                </button>
+            </a>
+            <a href="/viewOne/<%= element.id_entry %>">
+                <button>
+                    Leer más
+                </button>
+            </a>
+            
+
+        </div>
+
+        <div class="gridName">
+            <%= element.surname %> , <%= element.date %>
+
+        </div>
+          
+    </div> 
+<% }) %>
+</main>
+<%- include('partials/footer.ejs') %>

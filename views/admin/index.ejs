@@ -1,0 +1,73 @@
+<%- include('partials/header.ejs') %>
+<main>
+
+    <form action="/search" method="post" class="search">
+        <input type="text" name="search">
+        <input type="submit" value="Buscar">
+    </form>
+<h1>
+    <%= title %>
+</h1>
+<p>
+    <%= msg %>
+</p>
+    
+<table>
+    <thead>
+        <th>
+            Título
+        </th>
+        <th>
+            Estracto
+        </th>
+        <th>
+            Autor
+        </th>
+        <th>
+            Fecha
+        </th>
+        <th>
+            Editar
+        </th>
+    </thead>
+    <tbody>
+        <% data.forEach(element => { %>
+            <tr>
+                <td>
+                    <%= element.title %>
+                </td>
+                <td>
+                    <%= element.extract %>
+                </td>
+                <td>
+                    <%= element.surname %>
+                </td>
+                <td>
+                    <%= element.date %>
+                </td>
+                <td>
+                    <a href="viewOne/<%= element.id_entry %>">
+                        <button>
+                            Leer más
+                        </button>
+                    </a>
+                    <a href="edit/<%= element.id_entry %>">
+                        <button>
+                            editar
+                        </button> 
+                        </a>
+                        <a href="delete/<%= element.id_entry %>">
+                            <button>
+                                borrar
+                            </button> 
+                            </a>
+                </td>
+            </tr>
+            <% }) %>
+    </tbody>
+</table>
+    
+
+
+</main>
+<%- include('partials/footer.ejs') %>

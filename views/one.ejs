@@ -1,0 +1,85 @@
+<%- include('partials/header.ejs') %>
+    <main>
+        <section class="viewone">
+            <div class="topSideInfo">
+                <div class="viewOneImage">
+                    <img alt="avatar" src="<%= data.authavatar %>" />
+                </div>
+                <span class="name">@<%= data.name %></span>
+                <div class="dateAndCat">
+                    <span class="date">
+                        <%= data.date %>
+                    </span>
+                    <span>
+                        #<%= data.category %>
+                    </span>
+                </div>
+            </div>
+            <h2>
+                <%= data.title %>
+            </h2>
+            <div class="contentInfo">
+                <%= data.content %>
+            </div>
+            <div class="entryImageOnView">
+                <img src="<%= data.entryimage %>" alt="Imagen de la entrada">
+            </div>
+
+        </section>
+        <h2 class="titles">
+            Respuestas(<%= replies.length %>):
+        </h2>
+
+        <section class="replies">
+
+            <% if (replies.length==0) { %>
+                <span class="textInfo">
+                    Todavía no hay respuestas
+                </span>
+
+                <% } else { %>
+
+                    <% replies.forEach(element=> { %>
+                        <article class="singleReply">
+                            <div class="topSideReply">
+                                <img alt="avatar" src="<%= element.avatar %>" />
+                                <span class="replyName">
+                                    @<%= element.name %>
+                                </span>
+                                <span>
+                                    <%= element.date %>
+                                </span>
+                            </div>
+                            <div class="botSideReply">
+                                <p>
+                                    <%= element.content %>
+                                </p>
+                            </div>
+                        </article>
+                        <% }) %>
+
+                            <% } %>
+
+        </section>
+
+        <% if (isLogged) { %>
+            <form class="replyForm" action="/uploadreply" method="post">
+                <span>Respóndele si quieres:</span>
+                <textarea name="content"></textarea>
+                <input type="hidden" name="id_entry" value="<%= id %>">
+                <input type="hidden" name="name" value="<%= isLogged.name %>">
+                <input type="submit" value="enviar">
+            </form>
+
+            <% } else { %>
+                <section class="replySection">
+                    <span>
+                        Logéate para escribir una respuesta!
+                    </span>
+                </section>
+
+                <% } %>
+
+                    </section>
+    </main>
+    <%- include('partials/footer.ejs') %>

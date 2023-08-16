@@ -1,0 +1,49 @@
+<%- include('partials/header.ejs') %>
+<main>
+    
+<h1>
+    <%= title %>
+</h1>
+<p>
+    <%= msg %>
+</p>
+<form action="/admin/search" method="post" class="search">
+    <input type="text" name="search">
+    <input type="submit" value="Buscar">
+</form>
+<% if (query) { %>
+    <% data.forEach(element => { %>
+        <div class="container">
+            <div class="gridTitle">
+                <%= element.title %>
+            </div>
+            <div class="gridDate">
+                <%= element.date %>
+            </div>
+            <div class="gridContent">
+                <%= element.extract %>
+            </div>
+            <div class="gridImage">
+                <img class="entryImage" src="<%= element.entryimage %>">
+            </div>
+            <div class="gridEdit">
+                <a href="edit/<%= element.id_entry %>">
+                    <button>
+                        editar
+                    </button>
+                </a>
+            <a href="viewOne/<%= element.id_entry %>">
+                <button>
+                    Leer más
+                </button>
+            </a>
+            </div>
+            <div class="gridName">
+                <%= element.surname %>
+            </div>
+              
+        </div> 
+        <% }) %>
+<% } %>
+</main>
+<%- include('partials/footer.ejs') %>

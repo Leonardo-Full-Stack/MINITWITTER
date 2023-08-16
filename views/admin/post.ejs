@@ -1,0 +1,39 @@
+<%- include('partials/header.ejs') %>
+<main>
+<h1>
+    <%= title %>
+</h1>
+<p>
+    <%= msg %>
+</p>
+<% if (errors) { %>
+    <p>
+        Han faltado los campos:
+        <% errores.input.forEach(element => { %>
+          <%= element %>
+        <% }) %>
+    </p>
+    <form method="post" action="/admin/post/" class="updateForm" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="títulos" value="<%= data.title %>">
+       <input type="text" name="extract" placeholder="Estracto" value="<%= data.extract %>">
+       <textarea name="content" placeholder="Contenido"><%= data.content %></textarea> 
+       <input type="file" name="entryImage">
+        <input type="text" name="category" placeholder="Categoría" value="<%= data.category %>"> 
+        <input type="submit" value="Publicar">
+
+<% } else { %>
+
+    <form method="post" action="/admin/post/" class="updateForm" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="títulos">
+       <input type="text" name="extract" placeholder="Estracto">
+       <textarea name="content" placeholder="Contenido"></textarea> 
+       <label for="entryImage">sdsdsd</label>
+       <input type="file" name="entryImage">
+        <input type="text" name="category" placeholder="Categoría"> 
+        <input type="submit" value="Publicar">
+   
+   </form>
+
+ <% } %>
+</main>
+<%- include('partials/footer.ejs') %>

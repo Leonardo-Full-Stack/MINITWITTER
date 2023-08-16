@@ -1,0 +1,129 @@
+@import 'variables';
+
+// aqui el registro,publicar entrada y error
+.signupForm {
+    width: 300px;
+    display: grid;
+    align-items: center;
+    height: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: $azul-clarito;
+    margin: 30px auto 0 auto;
+
+    input[type=submit] {
+        margin-top: 42px;
+    }
+}
+
+input, textarea {
+    padding: 10px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+
+input:hover, textarea:hover {
+    border-color: #ffcc29;
+    box-shadow: 0 0 5px rgba(51, 51, 51, 0.3);
+}
+
+
+input:focus, textarea:hover {
+    outline: none;
+    border-color: #ff5722;
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+}
+
+
+input::placeholder, textarea::placeholder {
+    color: #999;
+}
+
+
+button {
+    padding: 8px 15px;
+    background-color: #ff5722;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ff9a8b;
+}
+
+.updateForm {
+    width: 300px;
+    display: grid;
+    align-items: center;
+    height: 700px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: $azul-clarito;
+    margin: 30px auto 0 auto;
+
+    input[type=submit] {
+        margin-top: 42px;
+    }
+
+    textarea {
+        height:200px;
+    }
+}
+
+.backLink {
+    margin-top: 20px;
+    max-width: 224px;
+    display: grid;
+    margin: 40px auto 0 auto;
+    transition: transform 0.3s ease-in-out;
+    text-decoration: none;
+
+    span {
+        text-align: center;
+    }
+}
+
+.backLink:hover {
+    transform: scale(1.2);
+}
+
+.replyForm {
+    max-width: 337px;
+    display: grid;
+    align-items: center;
+    height: 325px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: $azul-clarito;
+    margin: 30px auto 100px auto;
+    border:1px solid black;
+
+    span {
+        text-align: center;
+    }
+
+    textarea {
+        font-size:20px;
+        min-height:100px;
+    }
+}
+
+.replySection {
+    max-width: 337px;
+    display: grid;
+    align-items: center;
+    height: 107px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: $azul-clarito;
+    margin: 30px auto 100px auto;
+    border:1px solid black;
+}

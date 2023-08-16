@@ -1,0 +1,42 @@
+<%- include('partials/header.ejs') %>
+<main>
+
+<h1>
+    <%= title %>
+</h1>
+<p>
+    <%= msg %>
+</p>
+<form action="/search" method="post" class="search">
+    <input type="text" name="search">
+    <input type="submit" value="Buscar">
+</form>
+<% if (query) { %>
+    <% data.forEach(element => { %>
+        <div class="container">
+                
+            <img class="avatar" src="https://conteudo.imguol.com.br/c/entretenimento/80/2017/04/25/a-atriz-zoe-saldana-como-neytiri-em-avatar-1493136439818_v2_900x506.jpg.webp"/>
+            <div class="topSideInfo">
+                <span class="name">@<%= element.name %></span>
+                <div class="dateAndHashtag">
+                    <span><%= element.date %></span>
+                    <span>#<%= element.category %></span>
+                </div>
+            </div>
+            <div class="content">
+                <%= element.content %>
+            </div>
+            <img class="entryImage" src="<%= element.entryimage %>" alt="Imagen de la entrada">
+            <div class="botSideInfo">
+                <span>
+                    5 respuestas
+                </span>
+                <a href="/viewone/<%= element.id_entry %>">
+                    Ver hilo
+                </a>
+            </div>
+            </div>
+        <% }) %>
+<% } %>
+</main>
+<%- include('partials/footer.ejs') %>

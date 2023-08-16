@@ -1,0 +1,31 @@
+<%- include('partials/header.ejs') %>
+<main>
+<h1>
+    <%= title %>
+</h1>
+<p>
+    <%= msg %>
+</p>
+
+<form method="post" action="/admin/edit/" class="updateForm" enctype="multipart/form-data">
+    <h2>Título</h2><input type="text" name="title" placeholder="título" value="<%= data.title %>">
+    <input type="hidden" name="oldTitle" placeholder="título" value="<%= data.title %>">
+    <input type="hidden" name="email" value="<%= data.email %>">
+    <h2>Estracto</h2> <input type="text" name="extract" placeholder="Estracto" value="<%= data.extract %>">
+    <h2>Contenido</h2> <textarea name="content" placeholder="Contenido"><%= data.content %></textarea>
+    <h2>Imagen</h2> <img src="http://localhost:4000/<%= data.entryimage %>" class="entryImage" alt="Imagen de la entrada">
+    <input type="hidden" name="oldImage" value="<%= data.entryimage %>">
+    <input type="file" name="entryImage">
+    <h2>Categoría</h2><input type="text" name="category" placeholder="Categoría" value="<%= data.category %>">
+    <input type="submit" value="Publicar" class="button">
+
+</form>
+<div class="updateForm">
+<a href="/admin/delete/<%= data.id_entry %>">
+    <button>
+        Eliminar
+    </button>
+</a>
+</div>
+</main>
+<%- include('partials/footer.ejs') %>

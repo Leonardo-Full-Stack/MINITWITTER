@@ -1,0 +1,54 @@
+<%- include('partials/header.ejs') %>
+    <main>
+
+        <form action="/search" method="post" class="search">
+            <input type="text" name="search">
+            <input type="submit" value="Buscar">
+        </form>
+        <h1>
+            <%= title %>
+        </h1>
+        <p>
+            <%= msg %>
+        </p>
+
+
+        <% data.forEach(element=> { %>
+            <article class="container">
+                
+                <img class="avatar" src="<%= element.authavatar %>"/>
+                <div class="topSideInfo">
+                    <span class="name">@<%= element.name %></span>
+                    <div class="dateAndHashtag">
+                        <span><%= element.date %></span>
+                        <span>#<%= element.category %></span>
+                    </div>
+                </div>
+                <div class="content">
+                    <%= element.content %>
+                </div>
+                <img class="entryImage" src="<%= element.entryimage %>" alt="Imagen de la entrada">
+                <div class="botSideInfo">
+                    <span>
+                        <%= element.replies %> respuestas
+                    </span>
+                    <a href="/viewone/<%= element.id_entry %>">
+                        Ver hilo
+                    </a>
+                </div>
+            </article>
+            <% }) %>
+                <div class="pages">
+                    <% for( let index=1; index <=pages; index++ ) { %>
+
+                        <a class="pageButton" href="/entries?pag=<%= index %>">
+                            
+                                <%= index %>
+                            
+                        </a>
+
+                        <% } %>
+                    </div>
+
+    </main>
+    <%- include('partials/footer.ejs') %>
