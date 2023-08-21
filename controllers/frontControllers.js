@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const { consulta } = require('../helpers/dbConnect')
 const { ifLogged } = require('../helpers/isLogged')
 const { errorMsgs } = require('../helpers/errorMsg')
+const { uploadCloudinary } = require('../helpers/cloudImages')
 
 
 /**
@@ -16,7 +17,7 @@ const { errorMsgs } = require('../helpers/errorMsg')
  * @throws {Error} Si hay un error de conexión.
  */
 
-const showLogin = (req,res) => {
+const showLogin = (req, res) => {
     res.render('login', {
         title: 'login',
         msg: 'Consulta aqui todas las entradas',
@@ -29,7 +30,7 @@ const showEntries = async (req, res) => {
 
     let page;
 
-    if (req.query.pag == undefined)  page = 1
+    if (req.query.pag == undefined) page = 1
     else page = req.query.pag
 
     try {
@@ -52,7 +53,7 @@ const showEntries = async (req, res) => {
             isLogged,
             pages
         })
-        
+
     } catch (error) {
         res.render('error', {
             title: 'Error de conexión',
@@ -87,46 +88,51 @@ const postEntry = async (req, res) => {
  * @throws {Error} Si hay un error de conexión.
  */
 const uploadEntry = async (req, res) => {
+
     const userName = req.userName;
     const name = userName;
     const isLogged = await ifLogged(req)
-    console.log(isLogged,userName)
 
-
+    console.log(req.file, 'file')
     const { title, extract, content, category } = req.body
     const entryImage = req.file ? `/media/uploads/${req.file.filename}` : 'http://localhost:4001/media/noimagetwiter.png';
 
-    const body = { name, entryImage, ...req.body }
+    console.log(entryImage, 'paz')
+
 
 
 
     try {
 
-            const peticion = await consulta('entries/create', 'post', body)
-            const peticionJson = await peticion.json()
-            
+        const uploadImage = await uploadCloudinary(`/media/uploads/${req.file.filename}`)
 
-            if (peticionJson.ok) {
-                res.render('info', {
-                    title: 'Entrada creada',
-                    msg: 'Entrada creada con éxito!',
-                    isLogged
-                })
-            } else if (peticionJson.errores) {
-                const errores = errorMsgs(peticionJson.errores)
+        const body = { name, entryImage, ...req.body }
 
-                res.render('post', {
-                    title: 'Campos incorrectos',
-                    msg: 'Rellena bien los campos',
-                    data: body,
-                    isLogged,
-                    errors: true,
-                    errores,
-                    userName
+        const peticion = await consulta('entries/create', 'post', body)
+        const peticionJson = await peticion.json()
 
-                })
-            }
-       
+
+        if (peticionJson.ok) {
+            res.render('info', {
+                title: 'Entrada creada',
+                msg: 'Entrada creada con éxito!',
+                isLogged
+            })
+        } else if (peticionJson.errores) {
+            const errores = errorMsgs(peticionJson.errores)
+
+            res.render('post', {
+                title: 'Campos incorrectos',
+                msg: 'Rellena bien los campos',
+                data: body,
+                isLogged,
+                errors: true,
+                errores,
+                userName
+
+            })
+        }
+
 
 
     } catch (error) {
@@ -154,7 +160,7 @@ const uploadEntry = async (req, res) => {
 const myEntries = async (req, res) => {
     const isLogged = await ifLogged(req)
     const body = {
-        name:req.userName
+        name: req.userName
     }
     try {
         const peticion = await consulta(`entries/`, 'post', body)
@@ -419,27 +425,27 @@ const viewOne = async (req, res) => {
     }
 }
 
-const uploadReply = async (req,res) => {
-    const {content, id_entry, name} = req.body
+const uploadReply = async (req, res) => {
+    const { content, id_entry, name } = req.body
 
     const body = {
         content,
         id_entry,
         name
     }
-    
+
     try {
         const request = await consulta('replies/createreply', 'post', body)
         const response = await request.json()
-        
+
         if (response.ok) {
             res.redirect(`viewone/${id_entry}`)
         }
 
     } catch (error) {
         res.render('error', {
-            title:'error de algo',
-            msg:'Error al registrar la respuesta'
+            title: 'error de algo',
+            msg: 'Error al registrar la respuesta'
         })
     }
 }

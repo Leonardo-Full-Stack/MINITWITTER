@@ -14,7 +14,10 @@ const {
   showLogin,
   uploadReply
 } = require('../controllers/frontControllers')
+
+const {uploadEntry2} = require('../controllers/proofs')
 const {validarJwt,validarJwtAdmin} = require('../middleware/validarJwt')
+
 const multer  = require('multer')
 
 const storage = multer.diskStorage({
@@ -27,7 +30,6 @@ const storage = multer.diskStorage({
   })
   
 const upload = multer({ storage: storage })
-
 
 
 router.get('/', showEntries)
@@ -46,7 +48,7 @@ router.get('/post',validarJwt, postEntry)
 router.post('/post',[validarJwt,upload.single('entryImage')], uploadEntry)
 router.post('/uploadreply', uploadReply)
 router.get('/edit/:indexEntry',validarJwt, editEntry)
-router.post('/edit/',[validarJwt,upload.single('entryImage')],validarJwt, updateEntry)
+router.post('/edit/',[validarJwt,upload.single('entryImage')], updateEntry)
 router.get('/logout',validarJwt, logOut)
 
 
