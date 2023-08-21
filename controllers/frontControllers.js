@@ -104,7 +104,7 @@ const uploadEntry = async (req, res) => {
 
     try {
 
-        const uploadImage = await uploadCloudinary(`/media/uploads/${req.file.filename}`)
+        const uploadImage = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.file.filename}`)
 
         const body = { name, entryImage, ...req.body }
 
