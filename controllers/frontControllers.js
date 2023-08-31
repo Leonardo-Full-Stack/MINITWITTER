@@ -7,6 +7,7 @@ const { errorMsgs } = require('../helpers/errorMsg')
 const { uploadCloudinary } = require('../helpers/cloudImages')
 
 
+
 /**
  * Muestra las últimas entradas en la página de entradas.
  * 
@@ -94,8 +95,8 @@ const uploadEntry = async (req, res) => {
     const isLogged = await ifLogged(req)
 
     console.log(req.file, 'file')
-    const { title, extract, content, category } = req.body
-    const entryImage = req.file ? `/media/uploads/${req.file.filename}` : 'http://localhost:4001/media/noimagetwiter.png';
+    const { title, extract, content, category } = req.body // cambiar el localhost de aui abajo para el despliegue
+    let entryImage = req.file ? `/media/uploads/${req.file.filename}` : 'http://localhost:4001/media/noimagetwiter.png';
 
     console.log(entryImage, 'paz')
 
@@ -103,10 +104,11 @@ const uploadEntry = async (req, res) => {
 
 
     try {
-
+        // despliegue : https://minitwitter-x2oo.onrender.com/
+        // local : http://localhost:4001/media/
         const uploadImage = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.file.filename}`)
 
-        const body = { name, entryImage, ...req.body }
+        const body = { name, entryImage:uploadImage, ...req.body }
 
         const peticion = await consulta('entries/create', 'post', body)
         const peticionJson = await peticion.json()
@@ -462,5 +464,5 @@ module.exports = {
     updateEntry,
     viewOne,
     showLogin,
-    uploadReply
+    uploadReply,
 }

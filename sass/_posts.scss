@@ -18,7 +18,7 @@
 
 input, textarea {
     padding: 10px;
-    border: 2px solid #3498db;
+    border: 2px solid $segundo-color;
     border-radius: 5px;
     font-size: 16px;
     color: #333;
@@ -44,7 +44,7 @@ input::placeholder, textarea::placeholder {
 }
 
 
-button {
+.button {
     padding: 8px 15px;
     background-color: #ff5722;
     border: none;

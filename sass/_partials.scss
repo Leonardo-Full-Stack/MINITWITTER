@@ -11,74 +11,80 @@ nav {
     background-color: $azul-clarito;
 
     #login {
-        cursor:pointer;
+        cursor: pointer;
     }
 
     .fas {
-        cursor:pointer;
+        cursor: pointer;
     }
 }
 
 main {
-    margin:0 auto;
+    margin: 0 auto;
 }
 
 header {
-    display:grid;
-    grid-template-columns: 50px 1fr 60px;
     background-color: $azul-clarito;
 
-    .logoHeader {
-        grid-column: 3 / 4;
-        max-width:50px;
-    }
+
 }
 
 nav {
+    position: relative;
+
+    .logoHeader {
+        position: absolute;
+        max-width: 200px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
     i {
-        margin-left:10px;
-        margin-top:10px;
+        margin-left: 10px;
+        margin-top: 10px;
         font-size: 20px;
+        color:$segundo-color;
     }
 
     .navDiv {
         display: grid;
         position: absolute;
-        max-height: 0; 
+        max-height: 0;
         top: 41px;
         left: 22px;
         box-sizing: border-box;
         overflow: hidden;
-        transition: max-height 0.3s ease-out; 
-        border-radius:10px;
+        transition: max-height 0.3s ease-out;
+        border-radius: 10px;
         background-color: white;
         text-decoration: none;
-        color:black;
+        color: $segundo-color;
 
         a {
             text-decoration: none;
-            padding:10px;
-            border-bottom:1px solid black;
-            background-color: $color-indigo;
+            padding: 10px;
+            border-bottom: 1px solid black;
+            background-color: $azul-clarito;
         }
 
         a:hover {
             background-color: white;
-            color:black;
+            color: black;
         }
-      }
-          
+    }
+
 }
 
 
 .displayNone {
-    max-height: calc(300px + 20px)!important;
-    border:1px solid $color-indigo;
-    z-index:10
+    max-height: calc(300px + 20px) !important;
+    border: 1px solid $color-indigo;
+    z-index: 10
 }
 
 .displayHidden {
-    display:none!important;
+    display: none !important;
 }
 
 .loginSection {
@@ -91,35 +97,70 @@ nav {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-  
-    form {
-      display: grid;
-      place-items: center;
-      width: 290px;
-      height: 438px;
-      border-radius: 10px;
-      position: relative; 
-      background-color: $azul-clarito;
-  
-      .closeSymbol {
-        position: absolute; /* Posicionar en relación con el contenedor padre */
-        top: 10px; /* Ajustar según sea necesario */
-        right: 10px; /* Ajustar según sea necesario */
-        cursor: pointer;
-        transition: transform 0.3s ease;
-  
-        &:hover {
-          transform: scale(1.2);
-        }
-      }
-  
-      img {
-        max-width: 191px;
-      }
-    }
-  }
 
-.opacStuff {
-    opacity:0.5;
+    form {
+        display: grid;
+        place-items: center;
+        width: 290px;
+        height: 438px;
+        border-radius: 10px;
+        position: relative;
+        background-color: $azul-clarito;
+
+        .closeSymbol {
+            position: absolute;
+            /* Posicionar en relación con el contenedor padre */
+            top: 10px;
+            /* Ajustar según sea necesario */
+            right: 10px;
+            /* Ajustar según sea necesario */
+            cursor: pointer;
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+
+        img {
+            max-width: 191px;
+        }
+    }
 }
 
+.opacStuff {
+    opacity: 0.5;
+}
+
+.divSearch {
+    margin-bottom:100px;
+}
+
+.msg {
+    display: block; 
+    text-align: center;
+    width: auto;
+    margin: 20px auto 0 auto;
+  }
+
+.searchSquare {
+    position:relative;
+    margin:10px;
+    input[type=text] {
+        border-radius: 10px;
+        position:absolute;
+        width:100%;
+        margin-bottom:20px;
+    }
+
+    .searchIcon {
+        position: absolute;
+        right:5px;
+        top:8px;
+    }
+    button, button:hover {
+        cursor:pointer;
+        background-color: transparent;
+        border: none;
+    }
+}
