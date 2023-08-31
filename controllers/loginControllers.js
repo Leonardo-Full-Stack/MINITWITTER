@@ -2,7 +2,8 @@ const express = require('express')
 const app = express();
 const cookieParser = require('cookie-parser')
 const { consulta } = require('../helpers/dbConnect')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const { uploadCloudinary } = require('../helpers/cloudImages');
 
 
 app.use(cookieParser())
@@ -137,10 +138,16 @@ const uploadSignup = async (req, res) => {
         
     } else {
 
-        const avatar = req.file ? `/media/uploads/${req.file.filename}` : 'https://front-blog.onrender.com/media/uploads/encapuchao.png';
+        let uploadImage;
 
+        if (req.file) {
+             uploadImage = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.file.filename}`)
+        } else {
+            uploadImage = 'https://front-blog.onrender.com/media/uploads/encapuchao.png'
+        }
+        
         const body = {
-            avatar,
+            avatar:uploadImage,
             ...req.body
         }
 
