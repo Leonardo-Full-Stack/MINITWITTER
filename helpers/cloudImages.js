@@ -34,7 +34,8 @@ cloudinary.config({
   } */
 
   const uploadCloudinary = async (file) => {
-
+    console.log('paso por cloudinary')
+    let url;
     try {
       await cloudinary.uploader.upload(file, (error, result) => {
         if (error) {
@@ -42,14 +43,14 @@ cloudinary.config({
             return 'Error al subir la imagen'
         } else {
           console.log(result,'cloooud')
-            return result.url
+            url = result.url
         }
     });
     } catch (error) {
       console.log(error)
     }
 
- 
+  return url
 };
 
  /*    console.log(file)
