@@ -38,9 +38,10 @@ cloudinary.config({
     try {
       await cloudinary.uploader.upload(file, (error, result) => {
         if (error) {
-            console.log(error)
+            console.log(error,'cloooud')
             return 'Error al subir la imagen'
         } else {
+          console.log(result,'cloooud')
             return result.url
         }
     });
