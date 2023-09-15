@@ -1,4 +1,4 @@
-const urlBase='//https://api-blog-ahz5.onrender.com/api/'
+const urlBase='https://api-blog-ahz5.onrender.com/api/'
 //https://api-blog-ahz5.onrender.com/api/
 //http://localhost:3000/api/
 const express = require('express')
