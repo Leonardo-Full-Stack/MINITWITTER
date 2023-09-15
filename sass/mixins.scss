@@ -1,0 +1,11 @@
+@import "variables";
+
+@mixin cajita() {
+    width:95%;
+    border-radius: 10px;
+    border: 2px solid $segundo-color;
+    margin:10px auto;
+    padding:10px;
+    background-color: $azul-clarito;
+    
+}

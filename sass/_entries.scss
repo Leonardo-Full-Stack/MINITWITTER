@@ -1,4 +1,5 @@
 @import 'variables';
+@import "mixins";
 
 h1 {
     text-align: center;
@@ -99,4 +100,30 @@ h1 {
         cursor: pointer;
         font-size:22px;
     }
+}
+
+.categories {
+    @include cajita();
+
+    .categoryTitle {
+        text-align: center;
+        width:100%;
+        border-bottom:1px solid $segundo-color;
+        margin-bottom:10px;
+    }
+
+    .category {
+        display: grid;
+        grid-template-columns:1fr 100px;
+        padding:10px;
+        width:100%;
+        border-radius: 10px;
+        cursor: pointer;
+        
+    }
+
+    .category:hover {
+        background-color: $azul-hover;
+    }
+
 }

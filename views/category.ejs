@@ -2,29 +2,11 @@
     <main>
 
         <%- include('partials/searchTemplate.ejs') %>
-        <span class="msg">
+        <span class="msg title">
             <%= msg %>
         </span>
 
-        <section class="categories">
-            <div class="categoryTitle">
-              <span>
-                Categorías recientes
-            </span>   
-            </div>
-            <% categories.forEach(element => { %>
-                <a href="categories/<%= element.category %>">
-                  <div class="category">
-                    <span class="categoryName">
-                        # <%= element.category %>
-                    </span>
-                    <span class="categoryEntries">
-                        <%= element.category_count %> entradas
-                    </span>
-                   </div>  
-                </a>
-                
-            <% }) %>
+
            
         </section>
         <% data.forEach(element=> { %>
@@ -56,17 +38,7 @@
                 </div>
             </article>
             <% }) %>
-                <div class="pages">
-                    <% for( let index=1; index <=pages; index++ ) { %>
-
-                        <a class="pageButton" href="/entries?pag=<%= index %>">
-                            
-                                <%= index %>
-                            
-                        </a>
-
-                        <% } %>
-                    </div>
+                
 
     </main>
     <%- include('partials/footer.ejs') %>

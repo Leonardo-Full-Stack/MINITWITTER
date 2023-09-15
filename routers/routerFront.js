@@ -12,7 +12,8 @@ const {
   updateEntry, 
   viewOne, 
   showLogin,
-  uploadReply
+  uploadReply,
+  showCategories
 } = require('../controllers/frontControllers')
 
 const {uploadEntry2} = require('../controllers/proofs')
@@ -35,6 +36,7 @@ const upload = multer({ storage: storage })
 router.get('/', showEntries)
 router.get('/login', showLogin)
 router.get('/signup', signup)
+router.get('/categories/:category', showCategories)
 router.post('/signup',upload.single('avatar'), uploadSignup)
 router.post('/log', checkLogin)
 router.get('/search', getSearch)

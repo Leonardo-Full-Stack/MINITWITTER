@@ -38,21 +38,27 @@ const showEntries = async (req, res) => {
 
         const pageKnew = await consulta('entries/', 'get');
         const pageKnewJson = await pageKnew.json()
-        console.log(pageKnewJson)
+
 
         const pages = Math.ceil(pageKnewJson.data.length / 4)
 
 
-        const peticion = await consulta(`entries?pag=${page}`)
-        const peticionJson = await peticion.json()
-        console.log(peticionJson)
+        const peticion = await consulta(`entries?pag=${page}`);
+        const peticionJson = await peticion.json();
+
+        const categoriesReq = await consulta('entries/categorias/');
+        const categoriesResp = await categoriesReq.json();
+        const categories = await categoriesResp.categories
+
+  
 
         res.render('entries', {
             title: 'Últimas entradas',
             msg: 'Consulta aqui todas las entradas',
             data: peticionJson.data,
             isLogged,
-            pages
+            pages,
+            categories
         })
 
     } catch (error) {
@@ -92,7 +98,8 @@ const uploadEntry = async (req, res) => {
 
     const userName = req.userName;
     const name = userName;
-    const isLogged = await ifLogged(req)
+    const isLogged = await ifLogged(req);
+    let body;
 
     console.log(req.file, 'file')
     const { title, extract, content, category } = req.body // cambiar el localhost de aui abajo para el despliegue
@@ -106,9 +113,13 @@ const uploadEntry = async (req, res) => {
     try {
         // despliegue : https://minitwitter-x2oo.onrender.com/
         // local : http://localhost:4001/media/
-        const uploadImage = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.file.filename}`)
+        if (req.file) {
+            const uploadImage = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.file.filename}`)
 
-        const body = { name, entryImage:uploadImage, ...req.body }
+             body = { name, entryImage:uploadImage, ...req.body }
+        } else {
+             body = { name, entryImage, ...req.body }
+        }
 
         const peticion = await consulta('entries/create', 'post', body)
         const peticionJson = await peticion.json()
@@ -452,6 +463,35 @@ const uploadReply = async (req, res) => {
     }
 }
 
+const showCategories = async (req,res) => {
+     const category = req.params.category
+
+
+     try {
+        const request = await consulta(`entries/categorias/?q=${category}`);
+        const response = await request.json()
+
+        if (response.ok) {
+            res.render('category', {
+                title: 'error de algo',
+                msg: `Entradas para la categoría ${category}`,
+                data: response.entriesByCategory
+            })
+        } else {
+            res.render('error', {
+                title: 'error de algo',
+                msg: `No se han encontrado entradas para la categoría ${category}`,
+            })
+        }
+     } catch (error) {
+        res.render('error', {
+            title: 'error de servidor',
+            msg: `Contacta con el administrador`,
+        })
+     }
+
+}
+
 
 
 module.exports = {
@@ -465,4 +505,5 @@ module.exports = {
     viewOne,
     showLogin,
     uploadReply,
+    showCategories
 }
