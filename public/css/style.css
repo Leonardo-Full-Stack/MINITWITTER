@@ -175,7 +175,7 @@ h1 {
 .container {
   display: grid;
   grid-template-columns: 70px 1fr;
-  grid-template-rows: 50px auto 150px 40px;
+  grid-template-rows: 50px auto 150px 40px 70px;
   border-top: 1px solid #FF3D7B;
   border-bottom: 1px solid #FF3D7B;
   margin: 0 auto 0 auto;
@@ -274,6 +274,55 @@ h1 {
 }
 .categories .category:hover {
   background-color: #ced7da;
+}
+
+.followedButton {
+  width: 95%;
+  border-radius: 10px;
+  border: 2px solid #FF3D7B;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #F0F8FB;
+  grid-column: 1/3;
+  text-align: center;
+}
+
+.unFollowedButton {
+  width: 95%;
+  border-radius: 10px;
+  border: 2px solid #FF3D7B;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #F0F8FB;
+  grid-column: 1/3;
+  text-align: center;
+  background-color: #FF3D7B;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s, scale 0.3s;
+}
+
+.unFollowedButton:hover {
+  transform: translateY(-5px) scale(1.1);
+}
+
+.unLoggedFollow {
+  width: 95%;
+  border-radius: 10px;
+  border: 2px solid #FF3D7B;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #F0F8FB;
+  text-align: center;
+  font-size: 0.8rem;
+  grid-column: 1/3;
+  transition: transform 0.3s, scale 0.3s;
+  cursor: pointer;
+}
+
+.unLoggedFollow:hover {
+  transform: translateY(-5px) scale(1.1);
+  background-color: #F0F8FB;
 }
 
 .viewone {

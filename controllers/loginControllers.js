@@ -61,6 +61,11 @@ const checkLogin = async (req, res) => {
                     res.cookie('xtoken', peticionJson.token)
                     res.redirect('/entries?pag=1')
                 }
+            } else {
+                res.render('error', {
+                    title: 'Error de validación',
+                    msg: 'Usuario o contraseña incorrectos'
+                })
             }
 
 

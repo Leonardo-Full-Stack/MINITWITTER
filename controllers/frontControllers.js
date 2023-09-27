@@ -29,7 +29,7 @@ const showLogin = (req, res) => {
 const showEntries = async (req, res) => {
     const isLogged = await ifLogged(req)
 
-    let page;
+    let page, respFollows
 
     if (req.query.pag == undefined) page = 1
     else page = req.query.pag
@@ -50,7 +50,34 @@ const showEntries = async (req, res) => {
         const categoriesResp = await categoriesReq.json();
         const categories = await categoriesResp.categories
 
-  
+        //esto mandará la información de a quien sigue el usuario en caso de estar logeado
+        if (isLogged.ok) {
+
+            const token = req.cookies['xtoken']
+            const body = {
+                token
+            }
+            const myFollows = await consulta('aut/myfollows', 'post', body)
+            respFollows = await myFollows.json();
+
+            peticionJson.data.forEach(item => {
+
+                respFollows.showFollowers.forEach(followItem => {
+                    if (followItem.following == item.name) {
+                        item.following = true
+                    } else {
+                        item.following = false
+                    }
+                })
+            })
+
+
+        } else {
+            respFollows = {
+                showFollowers: false
+            }
+        }
+
 
         res.render('entries', {
             title: 'Últimas entradas',
@@ -58,7 +85,8 @@ const showEntries = async (req, res) => {
             data: peticionJson.data,
             isLogged,
             pages,
-            categories
+            categories,
+            respFollows: respFollows.showFollowers
         })
 
     } catch (error) {
@@ -116,9 +144,9 @@ const uploadEntry = async (req, res) => {
         if (req.file) {
             const uploadImage = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.file.filename}`)
 
-             body = { name, entryImage:uploadImage, ...req.body }
+            body = { name, entryImage: uploadImage, ...req.body }
         } else {
-             body = { name, entryImage, ...req.body }
+            body = { name, entryImage, ...req.body }
         }
 
         const peticion = await consulta('entries/create', 'post', body)
@@ -463,11 +491,11 @@ const uploadReply = async (req, res) => {
     }
 }
 
-const showCategories = async (req,res) => {
-     const category = req.params.category
+const showCategories = async (req, res) => {
+    const category = req.params.category
 
 
-     try {
+    try {
         const request = await consulta(`entries/categorias/?q=${category}`);
         const response = await request.json()
 
@@ -483,13 +511,46 @@ const showCategories = async (req,res) => {
                 msg: `No se han encontrado entradas para la categoría ${category}`,
             })
         }
-     } catch (error) {
+    } catch (error) {
         res.render('error', {
             title: 'error de servidor',
             msg: `Contacta con el administrador`,
         })
-     }
+    }
 
+}
+
+const showMyProfile = async (req, res) => {
+    const isLogged = await ifLogged(req)
+    const body = {
+        token: req.cookies['xtoken']
+    }
+
+    if (!isLogged) res.render('error', {
+                   title: 'Loguéate para ver tu perfil',
+                   msg:'Loguéate para ver tu perfil'
+    })
+
+    try {
+        const request = await consulta('aut/myprofile/', 'post', body)
+        const response = await request.json()
+        console.log(response)
+
+        if (response.ok) {
+            res.render('myProfile', {
+                title:'meh',
+                msg:'mah',
+                data:response.data[0]
+            })
+        }
+        
+
+    } catch (error) {
+        res.render('error', {
+            title: 'error de servidor',
+            msg: `Contacta con el administrador`,
+        })
+    }
 }
 
 
@@ -505,5 +566,6 @@ module.exports = {
     viewOne,
     showLogin,
     uploadReply,
-    showCategories
+    showCategories,
+    showMyProfile
 }

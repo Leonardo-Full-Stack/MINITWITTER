@@ -13,7 +13,8 @@ const {
   viewOne, 
   showLogin,
   uploadReply,
-  showCategories
+  showCategories,
+  showMyProfile
 } = require('../controllers/frontControllers')
 
 const {uploadEntry2} = require('../controllers/proofs')
@@ -47,6 +48,7 @@ router.get('/viewOne/:id', viewOne)
 //rutas protegidas
 router.get('/myEntries/',validarJwt, myEntries)
 router.get('/post',validarJwt, postEntry)
+router.get('/myprofile', showMyProfile)
 router.post('/post',[validarJwt,upload.single('entryImage')], uploadEntry)
 router.post('/uploadreply', uploadReply)
 router.get('/edit/:indexEntry',validarJwt, editEntry)
