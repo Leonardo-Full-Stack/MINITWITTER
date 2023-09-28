@@ -1,11 +1,108 @@
 <%- include('partials/header.ejs') %>
-<main>
-<h1>
-    <%= title %>
-</h1>
-<p>
-    <%= msg %> <%= data.email %>
-</p>
+    <main>
+        <section class="profileBox">
+            <div class="profileBackground">
+                <img class="backgroundImage" alt="imagen de fondo de perfil"
+                    src="https://altarendablog.com.br/wp-content/uploads/2023/06/A350_1.jpg">
+                <div class="avatarProfile">
+                    <img alt="avatar del usuario" src="http://res.cloudinary.com/dnxliek6h/image/upload/v1693467274/d0b9pbvdlmlhll5fjn8y.jpg">
+                </div>
+                <section class="profileInfo">
+                    <div class="profileName">
+                        <span class="mainName">
+                            <%= data.name %>
+                        </span>
+                        <span class="secondName">
+                            @<%= data.name %>
+                        </span>
 
-</main>
-<%- include('partials/footer.ejs') %>
+                        <button class="button">
+                            Editar
+                        </button>
+                        
+                    </div>
+
+                    
+                        <p class="description">
+                            <%= data.description %>
+                        </p>
+
+                        <a class="memberLink" href="<%= data.website %>">
+                            <%= data.website %>
+                        </a>
+                        <span class="joinedMember">
+                            <img src="/media/unido.png">
+                            Miembro de TweetHelp desde <%= data.joined %>
+                        </span>
+                        <div class="followsInfo">
+                            <span class="bolded">
+                                <%= follows.followingcounter %>
+                            </span>
+                            <span>
+                                Siguiendo
+                            </span>
+                            <span class="bolded">
+                                <%= follows.followercounter %>
+                            </span>
+                            <span>
+                                Seguidores
+                            </span>
+                        </div>
+                    
+                </section>
+            </div>
+
+        </section>
+
+        <section class="entriesProfile">
+            <div class="entriesHeader">
+                <span>
+                    Tus entradas
+                </span>
+            </div>
+            <% entries.forEach(element=> { %>
+                <article class="container profContainer">
+                    
+                    <img class="avatar" src="<%= element.authavatar %>"/>
+                    <div class="topSideInfo">
+                        <span class="name">@<%= element.name %></span>
+                        <div class="dateAndHashtag">
+                            <span><%= element.date %></span>
+                            <span>#<%= element.category %></span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <%= element.content %>
+                    </div>
+                    <img class="entryImage" src="<%= element.entryimage %>" alt="Imagen de la entrada">
+                    <div class="botSideInfo">
+                        <div class="respuestas">
+                         <img alt="icono bocata" src="/media/chaticon.png">
+                        <span>
+                            <%= element.replies %> respuestas
+                        </span>   
+                        </div>
+                        
+                        <a href="/viewone/<%= element.id_entry %>">
+                            Ver hilo
+                        </a>
+                    </div>
+                </article>
+    
+                        <% }) %>
+        </section>
+
+        <div class="pages">
+            <% for( let index=1; index <=pages; index++ ) { %>
+
+                <a class="pageButton" href="/myprofile?pag=<%= index %>">
+                    
+                        <%= index %>
+                    
+                </a>
+
+                <% } %>
+            </div>
+
+    </main>
+    <%- include('partials/footer.ejs') %>

@@ -522,9 +522,16 @@ const showCategories = async (req, res) => {
 
 const showMyProfile = async (req, res) => {
     const isLogged = await ifLogged(req)
+    let page = req.query.pag
+
+    if (page == undefined) page = 1
+
+
     const body = {
-        token: req.cookies['xtoken']
+        token: req.cookies['xtoken'],
+        page
     }
+    
 
     if (!isLogged) res.render('error', {
                    title: 'Loguéate para ver tu perfil',
@@ -534,13 +541,16 @@ const showMyProfile = async (req, res) => {
     try {
         const request = await consulta('aut/myprofile/', 'post', body)
         const response = await request.json()
-        console.log(response)
+
 
         if (response.ok) {
             res.render('myProfile', {
                 title:'meh',
                 msg:'mah',
-                data:response.data[0]
+                data:response.data[0],
+                follows:response.follows,
+                entries:response.entries,
+                pages:response.pages
             })
         }
         

@@ -1,11 +1,25 @@
 @import "variables";
 
 @mixin cajita() {
-    width:95%;
+    width: 95%;
     border-radius: 10px;
     border: 2px solid $segundo-color;
-    margin:10px auto;
-    padding:10px;
+    margin: 10px auto;
+    padding: 10px;
     background-color: $azul-clarito;
-    
+
+}
+
+@mixin botoncito() {
+    background-color: $segundo-color;
+    border-radius: 15px;
+    border: none;
+    color:white;
+    font-weight: bolder;
+    cursor: pointer;
+    transition: transform 0.3s, scale 0.3s;
+}
+
+@mixin botoncitoHover() {
+    transform: scale(1.1);
 }
