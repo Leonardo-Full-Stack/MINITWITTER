@@ -653,13 +653,13 @@ const editMyProfile2 = async (req,res) => {
         const response = await request.json();
 
         if (req.files['avatar']) {
-             uploadAvatar = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.files['avatar'].filename}`)
+             uploadAvatar = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.files['avatar'][0].filename}`)
         } else {
             uploadAvatar = response.profile[0].avatar
         }
 
         if (req.files['background']) {
-            uploadBackground = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.files['background'].filename}`)
+            uploadBackground = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.files['background'][0].filename}`)
        } else {
         uploadBackground = response.profile[0].background
        }
