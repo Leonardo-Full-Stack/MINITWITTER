@@ -60,7 +60,7 @@ const checkLogin = async (req, res) => {
                     res.redirect('/admin/?pag=1')
                 } else {// Y aquí cuando es un usuario normal
                     res.cookie('xtoken', peticionJson.token)
-                    res.redirect('/entries?pag=1')
+                    res.redirect('/mifeed')
                 }
             } else {
                 res.render('error', {
