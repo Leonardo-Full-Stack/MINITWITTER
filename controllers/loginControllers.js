@@ -166,7 +166,7 @@ const uploadSignup = async (req, res) => {
             if (response.ok) {
                 //Aqui el registro ha ido bien
                     res.cookie('xtoken', response.token)
-                    res.redirect('/entries')
+                    res.redirect('/mifeed')
 
             } else {
                 res.render('error', {
@@ -206,7 +206,10 @@ const editMyProfile = async (req,res) => {
             
         })
     } catch (error) {
-        
+        res.render('error', {
+            title: 'error de registro',
+            msg: error
+        })
     }
 }
 
