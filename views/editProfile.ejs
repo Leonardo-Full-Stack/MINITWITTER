@@ -1,0 +1,46 @@
+<%- include('partials/header.ejs') %>
+<main>
+<h1>
+    <%= title %>
+</h1>
+<p>
+    <%= msg %>
+</p>
+
+<% if (errors) { %>
+    <p>
+        Han faltado los campos:
+        <% errores.input.forEach(element => { %>
+          <%= element %>
+        <% }) %>
+    </p>
+    <form method="post" action="/post/" class="updateForm" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="título" value="<%= data.title %>">
+       <input type="text" name="extract" placeholder="Estracto" value="<%= data.extract %>">
+       <input type="hidden" name="name" value="<%= isLogged.name %>">
+       <textarea name="content" placeholder="Contenido"><%= data.content %></textarea> 
+       <label for="entryImage">Imagen de la entrada</label>
+       <input type="file" name="entryImage">
+        <input type="text" name="category" placeholder="Categoría" value="<%= data.category %>"> 
+        <input type="submit" value="Publicar">
+
+<% } else { %>
+
+    <form method="post" action="/editmyprofile2" class="updateForm" enctype="multipart/form-data">
+        <input type="text" name="website" placeholder="website">
+       <textarea name="description" placeholder="descripción de tu perfil"></textarea> 
+       <label for="avatar">Imagen para el avatar</label>
+       <input type="file" name="avatar">
+       <label for="background">Imagen de fondo de perfil</label>
+        <input type="file" name="background"> 
+        <input type="submit" value="Publicar">
+        <span>Si no deseas actualizar algún campo, déjalo en blanco!</span>
+        
+   
+   </form>
+
+ <% } %>
+ 
+
+</main>
+<%- include('partials/footer.ejs') %>

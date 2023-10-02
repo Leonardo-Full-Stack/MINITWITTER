@@ -622,9 +622,78 @@ const showMyFeed = async (req,res) => {
     if (!req.query.pag) page = 1
 
     try {
-        
+        const isLogged = await ifLogged(req)
+        const body = {name:isLogged.name}
+        const request = await consulta(`entries/myfeed?pag=${page}`, 'post', body)
+        const response = await request.json()
+        console.log(response.feed,'el fid')
+        res.render('myFeed', {
+            msg: 'Tu feed',
+            data: response.feed,
+            isLogged,
+            pages:response.pages
+        })
     } catch (error) {
-        
+        res.render('error', {
+            title: 'error de servidor',
+            msg: error,
+        })
+    }
+}
+
+const editMyProfile2 = async (req,res) => {
+    console.log(req.body)
+    console.log(req.files)
+    console.log(req.files['avatar'])
+    const {avatar, description, background, website} = req.body;
+    let uploadAvatar,uploadBackground,newWebsite,newDesc;
+    try {
+        const isLogged = await ifLogged(req);
+        const request = await consulta(`aut/profile/${isLogged.name}`);
+        const response = await request.json();
+
+        if (req.files['avatar']) {
+             uploadAvatar = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.files['avatar'].filename}`)
+        } else {
+            uploadAvatar = response.profile[0].avatar
+        }
+
+        if (req.files['background']) {
+            uploadBackground = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.files['background'].filename}`)
+       } else {
+        uploadBackground = response.profile[0].background
+       }
+
+       if (website == '') newWebsite = response.profile[0].website
+       else newWebsite = website
+
+       if (description == '') newDesc = response.profile[0].description
+       else newDesc = description
+
+       const body = {
+        name:isLogged.name,
+        avatar:uploadAvatar,
+        background:uploadBackground,
+        website:newWebsite,
+        description: newDesc
+       }
+
+       const putRequest = await consulta('aut/editprofile', 'put', body)
+       const putResponse = await putRequest.json()
+
+       if (putResponse.ok) {
+        res.redirect('/myprofile')
+       } else {
+        res.render('error', {
+            title: 'error de servidor',
+            msg: 'Sinceramente, no sé que ha pasado',
+        })
+       }
+    } catch (error) {
+        res.render('error', {
+            title: 'error de servidor',
+            msg: error,
+        })
     }
 }
 
@@ -644,5 +713,6 @@ module.exports = {
     showCategories,
     showMyProfile,
     showPublicProfile,
-    showMyFeed
+    showMyFeed,
+    editMyProfile2
 }

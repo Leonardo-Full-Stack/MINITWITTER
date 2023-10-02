@@ -9,27 +9,7 @@
             <%= msg %>
         </span>
 
-        <section class="categories">
-            <div class="categoryTitle">
-              <span>
-                Categorías recientes
-            </span>   
-            </div>
-            <% categories.forEach(element => { %>
-                <a href="categories/<%= element.category %>">
-                  <div class="category">
-                    <span class="categoryName">
-                        # <%= element.category %>
-                    </span>
-                    <span class="categoryEntries">
-                        <%= element.category_count %> entradas
-                    </span>
-                   </div>  
-                </a>
-                
-            <% }) %>
-           
-        </section>
+        
         <% data.forEach(element=> { %>
             <article class="container">
                 

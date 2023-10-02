@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const { consulta } = require('../helpers/dbConnect')
 const bcrypt = require('bcryptjs');
 const { uploadCloudinary } = require('../helpers/cloudImages');
+const { ifLogged } = require('../helpers/isLogged');
 
 
 app.use(cookieParser())
@@ -148,7 +149,7 @@ const uploadSignup = async (req, res) => {
         if (req.file) {
              uploadImage = await uploadCloudinary(`https://minitwitter-x2oo.onrender.com/media/uploads/${req.file.filename}`)
         } else {
-            uploadImage = 'https://front-blog.onrender.com/media/uploads/encapuchao.png'
+            uploadImage = 'http://res.cloudinary.com/dnxliek6h/image/upload/v1696253814/ucgpke3ozasyktwwmijn.png'
         }
         
         const body = {
@@ -174,13 +175,6 @@ const uploadSignup = async (req, res) => {
                 })
             }
 
-
-
-
-
-
-
-
         } catch (error) {
             res.render('error', {
                 title: 'error de registro',
@@ -191,10 +185,36 @@ const uploadSignup = async (req, res) => {
 
 }
 
+const editMyProfile = async (req,res) => {
+
+    try {
+        const isLogged = await ifLogged(req)
+        const request = await consulta(`aut/profile/${isLogged.name}`)
+        const response = await request.json()
+
+        if (!isLogged)
+        res.render('error', {
+            title: 'error de login',
+            msg: 'No estás logeado'
+        })
+
+        res.render('editProfile', {
+            title: 'Completa tu perfil',
+            msg: 'Rellena los campos',
+            isLogged,
+            errors: false,
+            
+        })
+    } catch (error) {
+        
+    }
+}
+
 module.exports = {
     getIndex,
     checkLogin,
     logOut,
     signup,
-    uploadSignup
+    uploadSignup,
+    editMyProfile
 }

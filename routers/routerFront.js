@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const bodyParser = require('body-parser')
-const {getIndex, checkLogin, logOut, signup, uploadSignup} = require('../controllers/loginControllers')
+const {getIndex, checkLogin, logOut, signup, uploadSignup, editMyProfile} = require('../controllers/loginControllers')
 const {
   showEntries, 
   postEntry, 
@@ -15,7 +15,9 @@ const {
   uploadReply,
   showCategories,
   showMyProfile,
-  showPublicProfile
+  showPublicProfile,
+  showMyFeed,
+  editMyProfile2
 } = require('../controllers/frontControllers')
 
 const {uploadEntry2} = require('../controllers/proofs')
@@ -33,11 +35,14 @@ const storage = multer.diskStorage({
   })
   
 const upload = multer({ storage: storage })
-
+const cpupload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'background', maxCount: 1 }])
 
 router.get('/', showEntries)
 router.get('/login', showLogin)
 router.get('/signup', signup)
+router.get('/mifeed', showMyFeed)
+router.get('/editmyprofile', editMyProfile)
+router.post('/editmyprofile2',cpupload, editMyProfile2)
 router.get('/categories/:category', showCategories)
 router.post('/signup',upload.single('avatar'), uploadSignup)
 router.post('/log', checkLogin)
