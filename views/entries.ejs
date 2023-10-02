@@ -68,11 +68,15 @@
                         <div onclick="addFollower('<%= isLogged.name %>' , '<%= element.name %>')" class="unFollowedButton <%= element.name %>">
                             Seguir
                         </div>
+                    <% } else if (isLogged.name == element.name) { %>
+                        <button id="showLogin" class="unLoggedFollow">
+                            No puedes seguirte a ti mismo.
+                        </button>
                     <% } else { %>
                         <button id="showLogin" class="unLoggedFollow">
                             Haz login para poder seguirle!
                         </button>
-                    <% } %>
+                        <% } %>
 
                     
                     
