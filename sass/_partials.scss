@@ -5,7 +5,7 @@
 * {
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', cursive;
+    font-family: 'Roboto', sans-serif;
 }
 
 nav {
@@ -45,7 +45,7 @@ nav {
         margin-left: 10px;
         margin-top: 10px;
         font-size: 20px;
-        color:$segundo-color;
+        color: $segundo-color;
     }
 
     .navDiv {
@@ -101,7 +101,7 @@ nav {
 
     form {
         display: grid;
-        grid-template-columns: 1fr 30px ;
+        grid-template-columns: 1fr 30px;
         grid-template-rows: 30px 200px 1fr;
         place-items: center;
         width: 290px;
@@ -115,7 +115,7 @@ nav {
             grid-column: 2 / 3;
             cursor: pointer;
             transition: transform 0.3s ease;
-            
+
 
             &:hover {
                 transform: scale(1.2);
@@ -136,7 +136,7 @@ nav {
 
             input {
                 max-width: 235px;
-                margin-top:5px;
+                margin-top: 5px;
             }
         }
 
@@ -148,32 +148,43 @@ nav {
 }
 
 .divSearch {
-    margin-bottom:100px;
+    width: 90%;
+    max-width: 360px;
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    margin: 0 auto 30px auto;
+    height:50px;
 }
 
 .msg {
-    display: block; 
+    display: block;
     text-align: center;
     width: auto;
     margin: 20px auto 0 auto;
-  }
+}
 
 .searchSquare {
-    position:relative;
-    margin:10px;
+    position: relative;
+    width: 90%;
+    max-width: 360px;
+    margin: 0 auto;
+    margin: 10px;
+
     input[type=text] {
         border-radius: 10px;
-        width:100%;
-        margin-bottom:20px;
+        width: 100%;
+        margin-bottom: 20px;
     }
 
     .searchIcon {
         position: absolute;
-        right:5px;
-        top:8px;
+        right: 5px;
+        top: 8px;
     }
-    button, button:hover {
-        cursor:pointer;
+
+    button,
+    button:hover {
+        cursor: pointer;
         background-color: transparent;
         border: none;
     }
@@ -181,5 +192,38 @@ nav {
 
 .title {
     font-size: 1.5rem;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
+
+.roundButton {
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    width:100%;
+    height:100%;
+    max-height:50px;
+    font-size: 2.5rem;
+    margin-top:10px;
+    background-color: $segundo-color;
+    cursor: pointer;
+}
+.newEntryButton {
+    text-decoration: none ;
+    text-emphasis: none ;
+    color:white;
+    max-height:50px;
+
+}
+
+.roundButton:hover {
+    background-color: #ffcc29;
+}
+
+.newEntryButton:hover {
+    background-color: transparent;
+}
+
+.decorationNone {
+    color: black;
+}
+

@@ -1,7 +1,8 @@
 <%- include('partials/header.ejs') %>
     <main>
-
-        <%- include('partials/searchTemplate.ejs') %>
+        <div class="divSearch">
+            <%- include('partials/searchTemplate.ejs') %>
+        </div>
         <span class="msg title">
             <%= msg %>
         </span>
@@ -38,6 +39,18 @@
                 </div>
             </article>
             <% }) %>
+
+            <div class="pages">
+                <% for( let index=1; index <=pages; index++ ) { %>
+    
+                    <a class="pageButton" href="/categories/<%= title %>?pag=<%= index %>">
+                        
+                            <%= index %>
+                        
+                    </a>
+    
+                    <% } %>
+                </div>
                 
 
     </main>

@@ -14,7 +14,8 @@ const {
   showLogin,
   uploadReply,
   showCategories,
-  showMyProfile
+  showMyProfile,
+  showPublicProfile
 } = require('../controllers/frontControllers')
 
 const {uploadEntry2} = require('../controllers/proofs')
@@ -44,6 +45,7 @@ router.get('/search', getSearch)
 router.post('/search', getSearch)
 router.get('/entries', showEntries)
 router.get('/viewOne/:id', viewOne)
+router.get('/profile/:name', showPublicProfile)
 
 //rutas protegidas
 router.get('/myEntries/',validarJwt, myEntries)

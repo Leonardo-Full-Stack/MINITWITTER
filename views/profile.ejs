@@ -2,8 +2,7 @@
     <main>
         <section class="profileBox">
             <div class="profileBackground">
-                <img class="backgroundImage" alt="imagen de fondo de perfil"
-                    src="<%= data.background %>">
+                <img class="backgroundImage" alt="imagen de fondo de perfil" src="<%= data.background %>">
                 <div class="avatarProfile">
                     <img alt="avatar del usuario" src="<%= data.avatar %>">
                 </div>
@@ -16,39 +15,42 @@
                             @<%= data.name %>
                         </span>
 
-                        <button class="button">
-                            Editar
-                        </button>
-                        
+                        <% if (isLogged.name != data.name) { %>
+                            <button class="button">
+                                Seguir
+                            </button>
+                            <% } %>
+
+
                     </div>
 
-                    
-                        <p class="description">
-                            <%= data.description %>
-                        </p>
 
-                        <a class="memberLink" href="<%= data.website %>">
-                            <%= data.website %>
-                        </a>
-                        <span class="joinedMember">
-                            <img src="/media/unido.png">
-                            Miembro de TweetHelp desde <%= data.joined %>
+                    <p class="description">
+                        <%= data.description %>
+                    </p>
+
+                    <a class="memberLink" href="<%= data.website %>">
+                        <%= data.website %>
+                    </a>
+                    <span class="joinedMember">
+                        <img src="/media/unido.png">
+                        Miembro de TweetHelp desde <%= data.joined %>
+                    </span>
+                    <div class="followsInfo">
+                        <span class="bolded">
+                            <%= follows.followingcounter %>
                         </span>
-                        <div class="followsInfo">
-                            <span class="bolded">
-                                <%= follows.followingcounter %>
-                            </span>
-                            <span>
-                                Siguiendo
-                            </span>
-                            <span class="bolded">
-                                <%= follows.followercounter %>
-                            </span>
-                            <span>
-                                Seguidores
-                            </span>
-                        </div>
-                    
+                        <span>
+                            Siguiendo
+                        </span>
+                        <span class="bolded">
+                            <%= follows.followercounter %>
+                        </span>
+                        <span>
+                            Seguidores
+                        </span>
+                    </div>
+
                 </section>
             </div>
 
@@ -57,17 +59,19 @@
         <section class="entriesProfile">
             <div class="entriesHeader">
                 <span>
-                    Tus entradas
+                    Sus entradas
                 </span>
             </div>
             <% entries.forEach(element=> { %>
                 <article class="container profContainer">
-                    
-                    <img class="avatar" src="<%= element.authavatar %>"/>
+
+                    <img class="avatar" src="<%= element.authavatar %>" />
                     <div class="topSideInfo">
                         <span class="name">@<%= element.name %></span>
                         <div class="dateAndHashtag">
-                            <span><%= element.date %></span>
+                            <span>
+                                <%= element.date %>
+                            </span>
                             <span>#<%= element.category %></span>
                         </div>
                     </div>
@@ -77,32 +81,32 @@
                     <img class="entryImage" src="<%= element.entryimage %>" alt="Imagen de la entrada">
                     <div class="botSideInfo">
                         <div class="respuestas">
-                         <img alt="icono bocata" src="/media/chaticon.png">
-                        <span>
-                            <%= element.replies %> respuestas
-                        </span>   
+                            <img alt="icono bocata" src="/media/chaticon.png">
+                            <span>
+                                <%= element.replies %> respuestas
+                            </span>
                         </div>
-                        
+
                         <a href="/viewone/<%= element.id_entry %>">
                             Ver hilo
                         </a>
                     </div>
                 </article>
-    
-                        <% }) %>
+
+                <% }) %>
         </section>
 
         <div class="pages">
             <% for( let index=1; index <=pages; index++ ) { %>
 
-                <a class="pageButton" href="/myprofile?pag=<%= index %>">
-                    
-                        <%= index %>
-                    
+                <a class="pageButton" href="/profile/<%= data.name %>?pag=<%= index %>">
+
+                    <%= index %>
+
                 </a>
 
                 <% } %>
-            </div>
+        </div>
 
     </main>
     <%- include('partials/footer.ejs') %>

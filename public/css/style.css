@@ -2,7 +2,7 @@
 * {
   margin: 0;
   box-sizing: border-box;
-  font-family: "Poppins", cursive;
+  font-family: "Roboto", sans-serif;
 }
 
 nav {
@@ -126,7 +126,12 @@ nav .navDiv a:hover {
 }
 
 .divSearch {
-  margin-bottom: 100px;
+  width: 90%;
+  max-width: 360px;
+  display: grid;
+  grid-template-columns: 1fr 50px;
+  margin: 0 auto 30px auto;
+  height: 50px;
 }
 
 .msg {
@@ -138,6 +143,9 @@ nav .navDiv a:hover {
 
 .searchSquare {
   position: relative;
+  width: 90%;
+  max-width: 360px;
+  margin: 0 auto;
   margin: 10px;
 }
 .searchSquare input[type=text] {
@@ -150,7 +158,8 @@ nav .navDiv a:hover {
   right: 5px;
   top: 8px;
 }
-.searchSquare button, .searchSquare button:hover {
+.searchSquare button,
+.searchSquare button:hover {
   cursor: pointer;
   background-color: transparent;
   border: none;
@@ -159,6 +168,38 @@ nav .navDiv a:hover {
 .title {
   font-size: 1.5rem;
   margin-bottom: 10px;
+}
+
+.roundButton {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  max-height: 50px;
+  font-size: 2.5rem;
+  margin-top: 10px;
+  background-color: #FF3D7B;
+  cursor: pointer;
+}
+
+.newEntryButton {
+  text-decoration: none;
+  text-emphasis: none;
+  color: white;
+  max-height: 50px;
+}
+
+.roundButton:hover {
+  background-color: #ffcc29;
+}
+
+.newEntryButton:hover {
+  background-color: transparent;
+}
+
+.decorationNone {
+  color: black;
 }
 
 h1 {
@@ -324,6 +365,52 @@ h1 {
 .unLoggedFollow:hover {
   transform: translateY(-5px) scale(1.1);
   background-color: #F0F8FB;
+}
+
+.trendsTitle {
+  display: block;
+  margin: 15px 0 0 10px;
+  font-weight: bolder;
+}
+
+.trends {
+  margin-top: 20px;
+  transition: transform 0.3s;
+}
+.trends .trendsContainer {
+  display: grid;
+  grid-template-rows: 20px 20px 20px;
+  margin-top: 20px;
+}
+.trends .trendsContainer span {
+  margin-left: 10px;
+}
+.trends .trendsContainer .trendTitle {
+  font-weight: bolder;
+}
+.trends .trendsContainer .trendTitle .noDec {
+  text-emphasis: none !important;
+  text-decoration: none !important;
+  color: black;
+}
+.trends .trendsContainer .trendCat {
+  font-weight: bolder;
+}
+.trends .trendsContainer .trendCat .noDec {
+  text-emphasis: none !important;
+  text-decoration: none !important;
+  color: rgba(53, 50, 50, 0.5098039216);
+}
+.trends .trendsContainer .trendPosts {
+  color: rgba(53, 50, 50, 0.5098039216);
+}
+
+a:hover {
+  background-color: #F0F8FB;
+}
+
+.trendSection {
+  margin-bottom: 50px;
 }
 
 .viewone {

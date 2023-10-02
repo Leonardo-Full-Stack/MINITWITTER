@@ -161,3 +161,66 @@ h1 {
     transform: translateY(-5px) scale(1.1);
     background-color: $azul-clarito;
 }
+
+.trendsTitle {
+    display:block;
+    margin: 15px 0 0 10px;
+    font-weight: bolder;
+}
+
+.trends {
+    margin-top:20px;
+    transition: transform 0.3s;
+    .trendsContainer {
+        display:grid;
+        grid-template-rows: 20px 20px 20px;
+        margin-top:20px;
+
+
+        span {
+            margin-left:10px;
+        }
+
+        .trendTitle {
+            font-weight: bolder;
+
+            .noDec {
+                text-emphasis: none !important;
+                text-decoration: none !important;
+                color:black;
+            }
+            
+        }
+
+        .trendCat {
+            font-weight: bolder;
+            .noDec {
+                text-emphasis: none !important;
+                text-decoration: none !important;
+                color:$gris;
+            }
+            
+        }
+
+        .trendPosts {
+            color: $gris
+        }
+
+        
+    }
+
+    
+    
+}
+
+a:hover {
+    background-color: $azul-clarito;
+}
+
+.trendSection {
+    margin-bottom:50px;
+}
+
+
+
+

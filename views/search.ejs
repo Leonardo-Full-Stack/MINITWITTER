@@ -41,5 +41,41 @@
                 </div>
                 <% }) %>
                     <% } %>
+    <section class="trendSection">
+        <div class="entriesHeader">
+            <span>
+                Tendencias
+            </span>
+        </div>
+        <span class="trendsTitle">
+            Tendencias de España
+        </span>
+        <div class="trends">
+
+            <% for( let index = 0; index < trends.trends.length; index++ ) { %>
+                <div class="trendsContainer">
+                <span class="trendCat">
+
+                   <%= index + 1 %> -<a class="noDec" href="/categories/<%= trends.trends[index].category %>">
+                        <%= trends.trends[index].category %>
+                    </a>
+                    - Tendencia
+                </span>
+
+                <span class="trendTitle">
+                <a class="noDec" href="/viewone/<%= trends.trends[index].id_entry %>">
+                    
+                        <%= trends.trends[index].title %>
+                    </a>
+                    </span>
+                
+        
+                <span class="trendPosts">
+                    <%= trends.trends[index].replies %> posts 
+                </span>
+            </div>
+            <% } %>
+    </div>
+    </section>
     </main>
     <%- include('partials/footer.ejs') %>

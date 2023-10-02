@@ -61,12 +61,12 @@ const showEntries = async (req, res) => {
             respFollows = await myFollows.json();
 
             peticionJson.data.forEach(item => {
+                item.following = false
 
                 respFollows.showFollowers.forEach(followItem => {
+
                     if (followItem.following == item.name) {
                         item.following = true
-                    } else {
-                        item.following = false
                     }
                 })
             })
@@ -108,7 +108,7 @@ const postEntry = async (req, res) => {
         msg: 'Rellena los campos',
         isLogged,
         errors: false,
-        userName
+        userName,
     })
 }
 
@@ -248,25 +248,31 @@ const getSearch = async (req, res) => {
 
     const isLogged = await ifLogged(req)
     const { search } = req.body
-    if (search == '') {
-        res.render('search', {
-            title: 'Búsqueda de entradas',
-            msg: 'El campo búsqueda está vacío',
-            query: false,
-            isLogged
-        })
-    } else if (!search) {
-        res.render('search', {
-            title: 'Búsqueda de entradas',
-            msg: 'Realiza aquí tu búsqueda',
-            query: false,
-            isLogged
-        })
-    } else {
-        try {
+
+    try {
+        const trendsRequest = await consulta('entries/trends')
+        const trends = await trendsRequest.json()
+        console.log(trends)
+        if (search == '') {
+            res.render('search', {
+                title: 'Búsqueda de entradas',
+                msg: 'El campo búsqueda está vacío',
+                query: false,
+                isLogged,
+                trends
+            })
+        } else if (!search) {
+            res.render('search', {
+                title: 'Búsqueda de entradas',
+                msg: 'Realiza aquí tu búsqueda',
+                query: false,
+                isLogged,
+                trends
+            })
+        } else {
             const peticion = await consulta('entries/', 'get')
-            const peticionJson = await peticion.json()
-            console.log(peticionJson)
+            const peticionJson = await peticion.json();
+            
 
             if (peticionJson.ok) {
                 let pattern = new RegExp(search, 'i')
@@ -278,7 +284,8 @@ const getSearch = async (req, res) => {
                         title: 'No hay resultados',
                         msg: 'No se han encontrado resultados con tu búsqueda',
                         query: false,
-                        isLogged
+                        isLogged,
+                        trends
                     })
                 } else {
                     res.render('search', {
@@ -286,27 +293,29 @@ const getSearch = async (req, res) => {
                         msg: `Se han encontrado ${finded.length} resultados`,
                         query: true,
                         data: finded,
-                        isLogged
+                        isLogged,
+                        trends
                     })
                 }
 
 
             }
-        } catch (error) {
-            res.render('error', {
-                title: 'error',
-                msg: error,
-                isLogged
-            })
         }
-
-
-
+    } catch (error) {
+        res.render('error', {
+            title: 'error',
+            msg: error,
+            isLogged
+        })
     }
 
 
 
 }
+
+
+
+
 
 
 /**
@@ -492,18 +501,24 @@ const uploadReply = async (req, res) => {
 }
 
 const showCategories = async (req, res) => {
+    const isLogged = await ifLogged(req)
     const category = req.params.category
+    let page = req.query.pag
+
+    if (!req.query.pag) page = 1
 
 
     try {
-        const request = await consulta(`entries/categorias/?q=${category}`);
+        const request = await consulta(`entries/categorias/?q=${category}&pag=${page}`);
         const response = await request.json()
-
+        console.log(response, 'categoria')
         if (response.ok) {
             res.render('category', {
-                title: 'error de algo',
+                title: `${category}`,
                 msg: `Entradas para la categoría ${category}`,
-                data: response.entriesByCategory
+                data: response.entriesByCategory,
+                pages: response.pages,
+                isLogged
             })
         } else {
             res.render('error', {
@@ -531,35 +546,85 @@ const showMyProfile = async (req, res) => {
         token: req.cookies['xtoken'],
         page
     }
-    
+
 
     if (!isLogged) res.render('error', {
-                   title: 'Loguéate para ver tu perfil',
-                   msg:'Loguéate para ver tu perfil'
+        title: 'Loguéate para ver tu perfil',
+        msg: 'Loguéate para ver tu perfil'
     })
 
     try {
         const request = await consulta('aut/myprofile/', 'post', body)
         const response = await request.json()
 
+        if (response.data[0].background == null) response.data[0].background = 'https://altarendablog.com.br/wp-content/uploads/2023/06/A350_1.jpg'
 
         if (response.ok) {
             res.render('myProfile', {
-                title:'meh',
-                msg:'mah',
-                data:response.data[0],
-                follows:response.follows,
-                entries:response.entries,
-                pages:response.pages
+                title: 'meh',
+                msg: 'mah',
+                data: response.data[0],
+                follows: response.follows,
+                entries: response.entries,
+                pages: response.pages,
+                isLogged
             })
         }
-        
+
 
     } catch (error) {
         res.render('error', {
             title: 'error de servidor',
             msg: `Contacta con el administrador`,
         })
+    }
+}
+
+const showPublicProfile = async (req, res) => {
+    const publicName = req.params.name
+    const isLogged = await ifLogged(req)
+    let page = req.query.pag
+    if (!req.query.pag) page = 1
+    try {
+        const request = await consulta(`aut/profile/${publicName}?pag=${page}`)
+        const response = await request.json()
+        if (response.ok) {
+
+            if (response.profile[0].background == null) response.profile[0].background = 'https://altarendablog.com.br/wp-content/uploads/2023/06/A350_1.jpg'
+            console.log(response.follows, 'aquiii')
+            res.render('profile', {
+                title: publicName,
+                msg: page,
+                data: response.profile[0],
+                follows: response.follows[0],
+                entries: response.entries,
+                pages: response.pages,
+                isLogged
+            })
+        } else {
+            res.render('error', {
+                title: 'No se ha encontrado al usuario',
+                msg: `Prueba quizás otra cosa`,
+            })
+        }
+
+    } catch (error) {
+        res.render('error', {
+            title: 'error de servidor',
+            msg: error,
+        })
+    }
+
+}
+
+const showMyFeed = async (req,res) => {
+    let page = req.query.pag
+    if (!req.query.pag) page = 1
+
+    try {
+        
+    } catch (error) {
+        
     }
 }
 
@@ -577,5 +642,7 @@ module.exports = {
     showLogin,
     uploadReply,
     showCategories,
-    showMyProfile
+    showMyProfile,
+    showPublicProfile,
+    showMyFeed
 }
