@@ -643,8 +643,8 @@ const showMyFeed = async (req,res) => {
 
 const editMyProfile2 = async (req,res) => {
     console.log(req.body)
-    console.log(req.files)
-    console.log(req.files['avatar'])
+    console.log(req.files['background'].filename)
+    console.log(req.files['avatar'].filename,'failnaim')
     const {avatar, description, background, website} = req.body;
     let uploadAvatar,uploadBackground,newWebsite,newDesc;
     try {
@@ -677,7 +677,7 @@ const editMyProfile2 = async (req,res) => {
         website:newWebsite,
         description: newDesc
        }
-
+       console.log(body)
        const putRequest = await consulta('aut/editprofile', 'put', body)
        const putResponse = await putRequest.json()
 
