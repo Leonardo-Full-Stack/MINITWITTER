@@ -64,7 +64,7 @@
                         <div class="followedButton">
                             siguiendo
                         </div>
-                    <% } else if (element.following == false && isLogged.name != element.following) { %>
+                    <% } else if (element.following == false && isLogged.name != element.name) { %>
                         <div onclick="addFollower('<%= isLogged.name %>' , '<%= element.name %>')" class="unFollowedButton <%= element.name %>">
                             Seguir
                         </div>
