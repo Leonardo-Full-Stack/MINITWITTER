@@ -7,7 +7,7 @@ const addFollower = async (follower, following) => {
         following
     }
     try {
-        const req = await fetch('http://localhost:3000/api/aut/follows/new', {
+        const req = await fetch('https://api-blog-ahz5.onrender.com/api/aut/follows/new', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
