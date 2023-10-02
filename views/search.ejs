@@ -31,8 +31,9 @@
                     </div>
                     <img class="entryImage" src="<%= element.entryimage %>" alt="Imagen de la entrada">
                     <div class="botSideInfo">
+                        <img alt="icono bocata" src="/media/chaticon.png">
                         <span>
-                            5 respuestas
+                            <%= element.replies %> respuestas
                         </span>
                         <a href="/viewone/<%= element.id_entry %>">
                             Ver hilo
