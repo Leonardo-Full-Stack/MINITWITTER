@@ -206,6 +206,7 @@ const myEntries = async (req, res) => {
     try {
         const peticion = await consulta(`entries/`, 'post', body)
         const peticionJson = await peticion.json()
+        console.log(peticionJson,'maientris')
         if (peticionJson.ok) {
             res.render('myEntries', {
                 title: 'Todas tus entradas',
