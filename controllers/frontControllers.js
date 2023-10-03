@@ -651,9 +651,6 @@ const showMyFeed = async (req,res) => {
 }
 
 const editMyProfile2 = async (req,res) => {
-    console.log(req.body)
-    console.log(req.files['background'].filename)
-    console.log(req.files['avatar'].filename,'failnaim')
     const {avatar, description, background, website} = req.body;
     let uploadAvatar,uploadBackground,newWebsite,newDesc;
     try {
