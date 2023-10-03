@@ -131,7 +131,7 @@ const uploadEntry = async (req, res) => {
 
     console.log(req.file, 'file')
     const { title, extract, content, category } = req.body // cambiar el localhost de aui abajo para el despliegue
-    let entryImage = req.file ? `/media/uploads/${req.file.filename}` : 'https://minitwitter-x2oo.onrender.com/media/noimagetwiter.png';
+    let entryImage = req.file ? `/media/uploads/${req.file.filename}` : 'https://res.cloudinary.com/dnxliek6h/image/upload/v1696263881/u5r8symzhocn5dnsr3qs.png';
 
     console.log(entryImage, 'paz')
 

@@ -11,7 +11,7 @@
 
         
         <% data.forEach(element=> { %>
-            <article class="container">
+            <article class="container gridFeedContainer">
                 
                 <img class="avatar" src="<%= element.authavatar %>"/>
                 <div class="topSideInfo">
@@ -36,19 +36,7 @@
                     <a href="/viewone/<%= element.id_entry %>">
                         Ver hilo
                     </a>
-                    <%  if (element.following == true) { %>
-                        <div class="followedButton">
-                            siguiendo
-                        </div>
-                    <% } else if (element.following == false) { %>
-                        <div onclick="addFollower('<%= isLogged.name %>' , '<%= element.name %>')" class="unFollowedButton <%= element.name %>">
-                            Seguir
-                        </div>
-                    <% } else { %>
-                        <button id="showLogin" class="unLoggedFollow">
-                            Haz login para poder seguirle!
-                        </button>
-                    <% } %>
+                    
 
                     
                     
