@@ -626,13 +626,22 @@ const showMyFeed = async (req,res) => {
         const body = {name:isLogged.name}
         const request = await consulta(`entries/myfeed?pag=${page}`, 'post', body)
         const response = await request.json()
-        console.log(response.feed,'el fid')
-        res.render('myFeed', {
-            msg: 'Tu feed',
-            data: response.feed,
-            isLogged,
-            pages:response.pages
-        })
+        if (response.ok) {
+            res.render('myFeed', {
+                msg: 'Tu feed',
+                data: response.feed,
+                isLogged,
+                pages:response.pages
+            }) 
+        } else {
+            res.render('myFeed', {
+                msg: 'Tu feed',
+                data: [],
+                isLogged,
+                pages:0
+            })
+        }
+       
     } catch (error) {
         res.render('error', {
             title: 'error de servidor',
