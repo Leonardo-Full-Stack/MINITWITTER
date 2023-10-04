@@ -778,4 +778,50 @@ button:hover {
   grid-template-rows: 50px auto 150px 40px;
 }
 
+@media screen and (min-width: 768px) {
+  .divSearch {
+    max-width: 500px;
+  }
+  .divSearch .searchSquare {
+    max-width: 500px;
+  }
+  .categories {
+    max-width: 500px;
+  }
+  .container {
+    max-width: 500px;
+  }
+  .trendSection {
+    max-width: 500px;
+  }
+  .updateForm {
+    width: 500px;
+  }
+  .profileBox {
+    max-width: 500px;
+  }
+  .profileBox .backgroundImage {
+    max-width: 500px;
+  }
+  .profileInfo {
+    max-width: 500px;
+  }
+  .viewone {
+    max-width: 500px;
+  }
+  .viewone .oneAvatar {
+    max-height: 90px;
+    max-width: 90px;
+  }
+  .viewone .entryImageOnView img {
+    max-width: 500px;
+  }
+  .replies {
+    max-width: 500px;
+  }
+  .replyForm {
+    max-width: 500px;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */
