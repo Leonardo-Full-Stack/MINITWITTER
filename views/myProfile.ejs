@@ -9,9 +9,11 @@
                 </div>
                 <section class="profileInfo">
                     <div class="profileName">
-                        <span class="mainName">
-                            <%= data.name %>
-                        </span>
+                        <span class="name">
+                            <a class="decorationNone" href="/profile/<%= element.name %>">
+                            @<%= element.name %>
+                        </a>
+                    </span>
                         <span class="secondName">
                             @<%= data.name %>
                         </span>
@@ -65,14 +67,21 @@
                     
                     <img class="avatar" src="<%= element.authavatar %>"/>
                     <div class="topSideInfo">
-                        <span class="name">@<%= element.name %></span>
+                        <span class="entryTitle">
+                            <%= element.title %>
+                        </span>
+                        <span class="name">
+                            <a class="decorationNone" href="/profile/<%= element.name %>">
+                            @<%= element.name %>
+                        </a>
+                    </span>
                         <div class="dateAndHashtag">
                             <span><%= element.date %></span>
                             <span>#<%= element.category %></span>
                         </div>
                     </div>
                     <div class="content">
-                        <%= element.content %>
+                        <%= element.extract %>
                     </div>
                     <img class="entryImage" src="<%= element.entryimage %>" alt="Imagen de la entrada">
                     <div class="botSideInfo">

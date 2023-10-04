@@ -4,7 +4,14 @@
         <div class="divSearch">
             <%- include('partials/searchTemplate.ejs') %>
         </div>
-        
+        <h1>
+            <span class="firstTitle">
+                Feed
+            </span>
+            <span class="secondTitle">
+                general
+            </span>
+        </h1>
         <span class="msg">
             <%= msg %>
         </span>
@@ -40,13 +47,16 @@
                         @<%= element.name %>
                     </a>
                 </span>
+                <span class="entryTitle">
+                    <%= element.title %>
+                </span>
                     <div class="dateAndHashtag">
                         <span><%= element.date %></span>
                         <span>#<%= element.category %></span>
                     </div>
                 </div>
                 <div class="content">
-                    <%= element.content %>
+                    <%= element.extract %>
                 </div>
                 <img class="entryImage" src="<%= element.entryimage %>" alt="Imagen de la entrada">
                 <div class="botSideInfo">

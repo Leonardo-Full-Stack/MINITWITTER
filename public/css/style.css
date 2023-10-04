@@ -1,4 +1,6 @@
 @charset "UTF-8";
+/* #FF3D7B */
+/* #FF3D7B */
 * {
   margin: 0;
   box-sizing: border-box;
@@ -202,6 +204,20 @@ nav .navDiv a:hover {
   color: black;
 }
 
+.firstTitle {
+  font-family: "Dela Gothic One";
+  font-size: 20px;
+  color: #FF3D7B;
+}
+
+.secondTitle {
+  font-family: "Dela Gothic One";
+  font-size: 20px;
+  color: #FF6662;
+}
+
+/* #FF3D7B */
+/* #FF3D7B */
 h1 {
   text-align: center;
 }
@@ -234,9 +250,15 @@ h1 {
   font-size: 12px;
 }
 .container .topSideInfo .name {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
   font-size: 20px;
   max-width: 130px;
   overflow: hidden;
+}
+.container .topSideInfo .entryTitle {
+  grid-row: 2/3;
+  font-weight: bolder;
 }
 .container .botSideInfo {
   grid-column: 1/3;
@@ -299,6 +321,7 @@ h1 {
   margin: 10px auto;
   padding: 10px;
   background-color: #F0F8FB;
+  max-width: 370px;
 }
 .categories .categoryTitle {
   text-align: center;
@@ -411,12 +434,15 @@ a:hover {
 
 .trendSection {
   margin-bottom: 50px;
+  max-width: 370px;
+  margin: 0 auto;
 }
 
 .gridFeedContainer {
   grid-template-rows: 50px auto 150px 40px;
 }
 
+/* #FF3D7B */
 .viewone {
   background-color: #F0F8FB;
   border-radius: 10px;
@@ -524,6 +550,7 @@ a:hover {
   margin-bottom: 10px;
 }
 
+/* #FF3D7B */
 .signupForm {
   width: 300px;
   display: grid;
@@ -641,6 +668,8 @@ button:hover {
   border: 1px solid black;
 }
 
+/* #FF3D7B */
+/* #FF3D7B */
 .profileBox {
   position: relative;
   height: 100%;

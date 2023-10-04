@@ -1,11 +1,18 @@
 <%- include('partials/header.ejs') %>
 <main>
-<h1>
-    <%= title %>
-</h1>
-<p>
-    <%= msg %>
-</p>
+    <h1>
+        <span class="firstTitle">
+            Todas tus
+        </span>
+        <span class="secondTitle">
+            Entradas
+        </span>
+    </h1>
+    <span class="msg">
+        <%= msg %>
+    </span>
+
+
 
 
 <% data.forEach((element, index) => { %>
@@ -13,6 +20,9 @@
                 
         <img class="avatar" src="<%= element.authavatar %>"/>
         <div class="topSideInfo">
+            <span class="entryTitle">
+                <%= element.title %>
+            </span>
             <span class="name">@<%= element.name %></span>
             <div class="dateAndHashtag">
                 <span><%= element.date %></span>
@@ -20,7 +30,7 @@
             </div>
         </div>
         <div class="content">
-            <%= element.content %>
+            <%= element.extract %>
         </div>
         <img class="entryImage" src="<%= element.entryimage %>" alt="Imagen de la entrada">
         <div class="botSideInfo">
