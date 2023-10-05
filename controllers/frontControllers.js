@@ -49,7 +49,7 @@ const showEntries = async (req, res) => {
         const categoriesReq = await consulta('entries/categorias/');
         const categoriesResp = await categoriesReq.json();
         const categories = await categoriesResp.categories
-
+        console.log(isLogged.ok,'isloged')
         //esto mandará la información de a quien sigue el usuario en caso de estar logeado
         if (isLogged.ok) {
 
