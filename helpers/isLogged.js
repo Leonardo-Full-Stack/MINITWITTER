@@ -24,7 +24,7 @@ const ifLogged = async (req) => {
     try {
         const request = await consulta('aut/verifyToken', 'post', body)
         const jsonReq = await request.json()
-        console.log(jsonReq.ok 'jeisonrek')
+        console.log(jsonReq.ok, 'jeisonrek')
         if (jsonReq.ok) {
             const { name, isAdmin } = jsonReq
             let result = {
