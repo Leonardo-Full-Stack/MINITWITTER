@@ -442,6 +442,18 @@ a:hover {
   grid-template-rows: 50px auto 150px 40px;
 }
 
+.loadingDiv {
+  width: 300px;
+  margin: 0 auto;
+}
+.loadingDiv img {
+  width: 100%;
+}
+
+.delete {
+  display: none;
+}
+
 /* #FF3D7B */
 .viewone {
   background-color: #F0F8FB;

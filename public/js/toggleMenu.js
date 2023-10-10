@@ -11,7 +11,6 @@ const showLogin = document.querySelector('#showLogin')
 
 burguerMenu.addEventListener('click', ()=> {
     navDiv.classList.toggle('displayNone')
-    
 })
 
 

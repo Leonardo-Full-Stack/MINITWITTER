@@ -28,13 +28,22 @@ const showLogin = (req, res) => {
 
 const showEntries = async (req, res) => {
     const isLogged = await ifLogged(req)
+    let isLoading = true;
 
     let page, respFollows
+
 
     if (req.query.pag == undefined) page = 1
     else page = req.query.pag
 
+    const miTimeout = setTimeout(() => {
+        isLoading = false;
+        console.log('cambio a false')
+    }, 7000);
+
     try {
+
+        
 
         const pageKnew = await consulta('entries/', 'get');
         const pageKnewJson = await pageKnew.json()
@@ -49,7 +58,7 @@ const showEntries = async (req, res) => {
         const categoriesReq = await consulta('entries/categorias/');
         const categoriesResp = await categoriesReq.json();
         const categories = await categoriesResp.categories
-        console.log(isLogged.ok,'isloged')
+
         //esto mandará la información de a quien sigue el usuario en caso de estar logeado
         if (isLogged.ok) {
 
@@ -78,7 +87,7 @@ const showEntries = async (req, res) => {
             }
         }
 
-
+        
         res.render('entries', {
             title: 'Últimas entradas',
             msg: 'Consulta aqui todas las entradas',
@@ -86,7 +95,7 @@ const showEntries = async (req, res) => {
             isLogged,
             pages,
             categories,
-            respFollows: respFollows.showFollowers
+            respFollows: respFollows.showFollowers,
         })
 
     } catch (error) {
@@ -95,8 +104,6 @@ const showEntries = async (req, res) => {
             msg: error
         })
     }
-
-
 
 }
 
@@ -206,7 +213,7 @@ const myEntries = async (req, res) => {
     try {
         const peticion = await consulta(`entries/`, 'post', body)
         const peticionJson = await peticion.json()
-        console.log(peticionJson,'maientris')
+
         if (peticionJson.ok) {
             res.render('myEntries', {
                 title: 'Todas tus entradas',

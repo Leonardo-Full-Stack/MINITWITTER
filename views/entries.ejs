@@ -1,109 +1,120 @@
 <%- include('partials/header.ejs') %>
-    <main>
-
-        <div class="divSearch">
-            <%- include('partials/searchTemplate.ejs') %>
-        </div>
-        <h1>
-            <span class="firstTitle">
-                Feed
-            </span>
-            <span class="secondTitle">
-                general
-            </span>
-        </h1>
-        <span class="msg">
-            <%= msg %>
+<div class="loadingDiv">
+    <img class="loadingImg" src="/media/triangles.gif">
+    <h1>
+        <span class="firstTitle">
+            Esperando
         </span>
-
-        <section class="categories">
-            <div class="categoryTitle">
-              <span>
-                Categorías recientes
-            </span>   
-            </div>
-            <% categories.forEach(element => { %>
-                <a href="categories/<%= element.category %>">
-                  <div class="category">
-                    <span class="categoryName">
-                        # <%= element.category %>
+        <span class="secondTitle">
+            al servidor
+        </span>
+    </h1>
+</div>
+    <main class="main delete">
+                    <h1>
+                        <span class="firstTitle">
+                            Feed
+                        </span>
+                        <span class="secondTitle">
+                            general
+                        </span>
+                    </h1>
+                    <span class="msg">
+                        <%= msg %>
                     </span>
-                    <span class="categoryEntries">
-                        <%= element.category_count %> entradas
-                    </span>
-                   </div>  
-                </a>
-                
-            <% }) %>
-           
-        </section>
-        <% data.forEach(element=> { %>
-            <article class="container">
-                
-                <img class="avatar" src="<%= element.authavatar %>"/>
-                <div class="topSideInfo">
-                    <span class="name">
-                        <a class="decorationNone" href="/profile/<%= element.name %>">
-                        @<%= element.name %>
-                    </a>
-                </span>
-                <span class="entryTitle">
-                    <%= element.title %>
-                </span>
-                    <div class="dateAndHashtag">
-                        <span><%= element.date %></span>
-                        <span>#<%= element.category %></span>
-                    </div>
-                </div>
-                <div class="content">
-                    <%= element.extract %>
-                </div>
-                <img class="entryImage" src="<%= element.entryimage %>" alt="Imagen de la entrada">
-                <div class="botSideInfo">
-                    <div class="respuestas">
-                     <img alt="icono bocata" src="/media/chaticon.png">
-                    <span>
-                        <%= element.replies %> respuestas
-                    </span>   
-                    </div>
-                    
-                    <a href="/viewone/<%= element.id_entry %>">
-                        Ver hilo
-                    </a>
-                    <%  if (element.following == true) { %>
-                        <div class="followedButton">
-                            siguiendo
+
+                    <section class="categories">
+                        <div class="categoryTitle">
+                            <span>
+                                Categorías recientes
+                            </span>
                         </div>
-                    <% } else if (element.following == false && isLogged.name != element.name) { %>
-                        <div onclick="addFollower('<%= isLogged.name %>' , '<%= element.name %>')" class="unFollowedButton <%= element.name %>">
-                            Seguir
-                        </div>
-                    <% } else if (isLogged.name == element.name) { %>
-                        <button id="showLogin" class="unLoggedFollow">
-                            No puedes seguirte a ti mismo.
-                        </button>
-                    <% } else { %>
-                        <button id="showLogin" class="unLoggedFollow">
-                            Haz login para poder seguirle!
-                        </button>
-                        <% } %>
+                        <% categories.forEach(element=> { %>
+                            <a href="categories/<%= element.category %>">
+                                <div class="category">
+                                    <span class="categoryName">
+                                        # <%= element.category %>
+                                    </span>
+                                    <span class="categoryEntries">
+                                        <%= element.category_count %> entradas
+                                    </span>
+                                </div>
+                            </a>
 
-                    
-                    
-                </div>
-            </article>
-            <% }) %>
-                <div class="pages">
-                    <% for( let index=1; index <=pages; index++ ) { %>
+                            <% }) %>
 
-                        <a class="pageButton" href="/entries?pag=<%= index %>">
-                            
-                                <%= index %>
-                            
-                        </a>
+                    </section>
+                    <% data.forEach(element=> { %>
+                        <article class="container">
 
-                        <% } %>
-                    </div>
+                            <img class="avatar" src="<%= element.authavatar %>" />
+                            <div class="topSideInfo">
+                                <span class="name">
+                                    <a class="decorationNone" href="/profile/<%= element.name %>">
+                                        @<%= element.name %>
+                                    </a>
+                                </span>
+                                <span class="entryTitle">
+                                    <%= element.title %>
+                                </span>
+                                <div class="dateAndHashtag">
+                                    <span>
+                                        <%= element.date %>
+                                    </span>
+                                    <span>#<%= element.category %></span>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <%= element.extract %>
+                            </div>
+                            <img class="entryImage" src="<%= element.entryimage %>" alt="Imagen de la entrada">
+                            <div class="botSideInfo">
+                                <div class="respuestas">
+                                    <img alt="icono bocata" src="/media/chaticon.png">
+                                    <span>
+                                        <%= element.replies %> respuestas
+                                    </span>
+                                </div>
+
+                                <a href="/viewone/<%= element.id_entry %>">
+                                    Ver hilo
+                                </a>
+                                <% if (element.following==true) { %>
+                                    <div class="followedButton">
+                                        siguiendo
+                                    </div>
+                                    <% } else if (element.following==false && isLogged.name !=element.name) { %>
+                                        <div onclick="addFollower('<%= isLogged.name %>' , '<%= element.name %>')"
+                                            class="unFollowedButton <%= element.name %>">
+                                            Seguir
+                                        </div>
+                                        <% } else if (isLogged.name==element.name) { %>
+                                            <button id="showLogin" class="unLoggedFollow">
+                                                No puedes seguirte a ti mismo.
+                                            </button>
+                                            <% } else { %>
+                                                <button id="showLogin" class="unLoggedFollow">
+                                                    Haz login para poder seguirle!
+                                                </button>
+                                                <% } %>
+
+
+
+                            </div>
+                        </article>
+                        <% }) %>
+                            <div class="pages">
+                                <% for( let index=1; index <=pages; index++ ) { %>
+
+                                    <a class="pageButton" href="/entries?pag=<%= index %>">
+
+                                        <%= index %>
+
+                                    </a>
+
+                                    <% } %>
+                            </div>
 
     </main>
+    <script src="/js/loading.js" data-loading='true'></script>
     <%- include('partials/footer.ejs') %>
